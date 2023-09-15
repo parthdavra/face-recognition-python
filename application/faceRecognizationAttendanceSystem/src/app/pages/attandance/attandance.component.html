@@ -1,0 +1,101 @@
+<div class="container-fluid flex-grow-1 container-p-y">
+    <div class="card">
+        <div class="card-datatable table-responsive">
+            <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="DataTables_Table_0_length">
+                            <label>Show
+                                <select name="DataTables_Table_0_length" [(ngModel)]="itemsPerPage"
+                                    (change)="itemsPerPageChange($event.target.value)" class="form-select">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="75">75</option>
+                                    <option value="100">100</option>
+                                </select> entries
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end">
+                        <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                            <label>Search:
+                                <input type="search" (input)="search()" [(ngModel)]="searchTerm" class="form-control"
+                                    placeholder="Search here ..." aria-controls="DataTables_Table_0">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <table class="table dataTable ">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Student Id</th>
+                            <th>Date and Time</th>
+                            <th>User Type</th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        <tr
+                            *ngFor="let item of attandanceList | paginate: { itemsPerPage: l, currentPage: p };let collectionIndex = index">
+                            <td>{{ l * (p - 1) + collectionIndex +1 }}</td>
+                            <td>{{item.student_id}}</td>
+                            <td>{{item.created_at | date :'dd/MM/yyyy hh:mm a'}}</td>
+                            <td>{{item.user_type ? item.user_type : 'Unknown' }}</td>
+                        </tr>
+                        <tr *ngIf="noData">
+                            <td colspan="4">
+                                <h4 class="text-center mt-3">No Data Found</h4>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_info">Showing {{attandanceList.length > 0 ? l * (p - 1) + 1 : 0}} to {{l
+                            *
+                            (p - 1) + l < attandanceList.length ? l * (p - 1) + l : attandanceList.length}} of
+                                {{attandanceList.length}} entries</div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_paginate paging_simple_numbers">
+                                <pagination-template #pagination="paginationApi" (pageChange)="p = $event">
+                                    <ul class="pagination">
+                                        <li class="page-item prev" [class.disabled]="pagination.isFirstPage()">
+                                            <a *ngIf="!pagination.isFirstPage()" class="page-link cursor-pointer"
+                                                (click)="pagination.previous()">
+                                                <i class="tf-icon bx bx-chevron-left"></i> </a>
+                                            <div *ngIf="pagination.isFirstPage()" class="page-link">
+                                                <i class="tf-icon bx bx-chevron-left"></i>
+                                            </div>
+                                        </li>
+
+                                        <li *ngFor="let page of pagination.pages" class="page-item"
+                                            [class.active]="pagination.getCurrent() === page.value">
+                                            <a (click)="pagination.setCurrent(page.value)"
+                                                class="page-link cursor-pointer"
+                                                *ngIf="pagination.getCurrent() !== page.value">
+                                                <span>{{ page.label }}</span>
+                                            </a>
+                                            <div class="page-link" *ngIf="pagination.getCurrent() === page.value">
+                                                <span>{{ page.label }}</span>
+                                            </div>
+                                        </li>
+                                        <li class="page-item next" [class.disabled]="pagination.isLastPage()">
+                                            <a *ngIf="!pagination.isLastPage()" class="page-link cursor-pointer"
+                                                (click)="pagination.next()"><i class="tf-icon bx bx-chevron-right"></i>
+                                            </a>
+                                            <div *ngIf="pagination.isLastPage()" class="page-link"><i
+                                                    class="tf-icon bx bx-chevron-right"></i> </div>
+                                        </li>
+                                    </ul>
+                                </pagination-template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
