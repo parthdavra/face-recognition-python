@@ -1,0 +1,95 @@
+<div class="container-fluid flex-grow-1 container-p-y">
+    <div class="card">
+        <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+            <div class="card-header flex-md-row">
+                <div class="head-label text-center">
+                    <h5 class="card-title mb-0">Add</h5>
+                </div>
+                <div class="dt-action-buttons text-end pt-md-0">
+                    <div class="dt-buttons">
+                        <button class="dt-button create-new btn btn-outline-primary" (click)="cancel()"><span><i
+                                    class='bx bx-arrow-back  me-sm-2'></i><span class="d-none d-sm-inline-block">Back to
+                                    Lst</span></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="addForm">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-sm-6 col-xs-6">
+                            <div class="mb-3">
+                                <label class="form-label required" for="basic-default-email">Name</label>
+                                <input type="text" class="form-control" id="basic-default-company" placeholder="Name..."
+                                    formControlName="name" />
+                                <div *ngIf="submittedData && faddData.name.errors">
+                                    <div *ngIf="faddData.name.errors.required">
+                                        <span class="error_msg">Name is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-sm-6 col-xs-6">
+                            <div class="mb-3">
+                                <label class="form-label required" for="basic-default-email">Email</label>
+                                <input type="text" class="form-control" id="basic-default-company" placeholder="Email"
+                                    formControlName="email" />
+                                <div *ngIf="submittedData && faddData.email.errors">
+                                    <div *ngIf="faddData.email.errors.required">
+                                        <span class="error_msg">Email ID is Required.</span>
+                                    </div>
+                                    <div *ngIf="!faddData.email.errors.valid && !faddData.email.errors.required">
+                                        <span class="error_msg">Please Enter Valid Email ID.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-sm-6 col-xs-6">
+                            <div class="mb-3">
+                                <label class="form-label required" for="basic-default-email">User Type</label>
+                                <ng-select [items]="userTypeList" class="form-control p-0"
+                                    [readonly]="userType == 'staff'" bindLabel="userTypeList" [clearable]="true"
+                                    bindValue="userTypeList" placeholder="User Type" [searchable]="false"
+                                    formControlName="user_type" (change)="userTypeChange()">
+                                </ng-select>
+                                <div *ngIf="submittedData && faddData.user_type.errors">
+                                    <div *ngIf="faddData.user_type.errors.required">
+                                        <span class="error_msg">User Type is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-sm-6 col-xs-6"
+                            *ngIf="faddData.user_type.value == 'student' || faddData.user_type.value == 'staff'">
+                            <div class="mb-3">
+                                <label class="form-label" for="basic-default-email">Password</label>
+                                <input type="password" class="form-control" id="basic-default-company"
+                                    placeholder="Password" formControlName="password" />
+                                <div *ngIf="submittedData && faddData.password.errors">
+                                    <div *ngIf="faddData.password.errors.required">
+                                        <span class="error_msg">Password is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-sm-6 col-xs-6">
+                            <div class="mb-3">
+                                <label class="form-label required" for="basic-default-email">Face Image</label>
+                                <input type="file" class="form-control" accept="image/*" id="basic-default-company" placeholder="image"
+                                    formControlName="image" (change) = "onSelectFile($event)" />
+                                <div *ngIf="submittedData && faddData.image.errors">
+                                    <div *ngIf="faddData.image.errors.required">
+                                        <span class="error_msg">Face Image is Required.</span>
+                                    </div>
+                                    <div *ngIf="!faddData.image.errors.valid && !faddData.image.errors.required">
+                                        <span class="error_msg">Please Uplaod Face Image.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

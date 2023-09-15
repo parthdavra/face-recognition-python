@@ -1,0 +1,39 @@
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="javascript:void(0);" class="app-brand-link">
+
+            <span class="max-width app-brand-text fw-bolder text-capitalize">Face Recognization Attandance System</span>
+        </a>
+
+        <a href="javascript:void(0);" (click)="sidebarClose()"
+            class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1 sidebar-wrapper">
+        <!-- Users -->
+        <li class="menu-item" routerLinkActive="active">
+            <a routerLink="users" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-group'></i>
+                <div data-i18n="Analytics">Users</div>
+            </a>
+        </li>
+        <!-- Staff -->
+        <li class="menu-item" routerLinkActive="active">
+            <a routerLink="staff" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-group'></i>
+                <div data-i18n="Analytics">Staff</div>
+            </a>
+        </li>
+        <!-- Attandance -->
+        <li class="menu-item" routerLinkActive="active">
+            <a routerLink="attandance" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-spreadsheet'></i>
+                <div data-i18n="Analytics">Attandance</div>
+            </a>
+        </li>
+    </ul>
+</aside>
