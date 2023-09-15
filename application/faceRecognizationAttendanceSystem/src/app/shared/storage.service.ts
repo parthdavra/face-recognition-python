@@ -22,17 +22,6 @@ export class StorageService {
 
 export class StorageKey {
 
-  public static myToken = 'myToken';
-  public static roleId = 'roleId';
-  public static contact = 'contact';
-  public static reference = 'reference';
-  public static aadharcardNo = 'aadharcardNo';
-  public static lastName = 'lastName';
-  public static email = 'email';
-  public static full_name = 'name';
-  public static roleName = 'roleName';
-  public static utsav_decor_logo = 'utsav_decor_logo';
-  public static isUtsavDecoreLogin = 'isUtsavDecoreLogin';
 
 }
 

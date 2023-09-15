@@ -2,6 +2,20 @@
     <div class="card">
         <div class="card-datatable table-responsive">
             <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+                <div class="card-header flex-column flex-md-row">
+                    <div class="head-label text-center">
+                        <h5 class="card-title mb-0">&nbsp;</h5>
+                    </div>
+                    <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                        <div class="dt-buttons">
+                            <button class="dt-button create-new btn btn-primary" (click)="addNew()" type="button">
+                                <span><i class="bx bx-plus me-sm-2"></i>
+                                    <span class="d-none d-sm-inline-block">Add New Class Room</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <div class="dataTables_length" id="DataTables_Table_0_length">
@@ -31,24 +45,20 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Student Id</th>
-                            <th>Date and Time</th>
-                            <th>User Type</th>
+                            <th>Camera Number</th>
                             <th>Class Number</th>
+                            
                         </tr>
                     </thead>
                     <tbody class="">
                         <tr
-                            *ngFor="let item of attandanceList | paginate: { itemsPerPage: l, currentPage: p };let collectionIndex = index">
+                            *ngFor="let item of roomList | paginate: { itemsPerPage: l, currentPage: p };let collectionIndex = index">
                             <td>{{ l * (p - 1) + collectionIndex +1 }}</td>
-                            <td>{{item.student_id}}</td>
-                            <td>{{item.created_at | date :'dd/MM/yyyy hh:mm a'}}</td>
-                            <td>{{item.user_type ? item.user_type : 'Unknown' }}</td>
-                            <td>{{item.class_number ? item.class_number : '-' }}</td>
-
+                            <td>{{item.class_id + 1}}</td>
+                            <td>{{item.class_number}}</td>
                         </tr>
                         <tr *ngIf="noData">
-                            <td colspan="4">
+                            <td colspan="5">
                                 <h4 class="text-center mt-3">No Data Found</h4>
                             </td>
                         </tr>
@@ -57,10 +67,9 @@
                 </table>
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_info">Showing {{attandanceList.length > 0 ? l * (p - 1) + 1 : 0}} to {{l
-                            *
-                            (p - 1) + l < attandanceList.length ? l * (p - 1) + l : attandanceList.length}} of
-                                {{attandanceList.length}} entries</div>
+                        <div class="dataTables_info">Showing {{roomList.length > 0 ? l * (p - 1) + 1 : 0}} to {{l *
+                            (p - 1) + l < roomList.length ? l * (p - 1) + l : roomList.length}} of {{roomList.length}}
+                                entries</div>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_paginate paging_simple_numbers">

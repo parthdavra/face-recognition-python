@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
 const errorController = require('./controllers/error');
 const cors = require('cors');
-
+const path = require('path');
 const app = express();
+const desktopPath = path.join(require('os').homedir(), 'Desktop', 'Finall project');
+app.use(desktopPath, express.static('uploads'));
 //app.use('/images', express.static(path.join(__dirname, '../../FaceRecognitionAttendanceSystem/faces')));
 const ports = process.env.PORT || 3000;
 app.use(bodyParser.json({ limit: '10mb' }));
