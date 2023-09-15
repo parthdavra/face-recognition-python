@@ -76,10 +76,22 @@ export class NavbarComponent implements OnInit {
         currentPageName: 'Attandances'
       };
     }
+    else if (titlee.includes('staff-attandance')) {
+      return {
+        pastPage: [],
+        currentPageName: 'Staff Attandances'
+      };
+    }
     else if (titlee.includes('staff')) {
       return {
         pastPage: [],
         currentPageName: 'Staffs'
+      };
+    }
+    else if (titlee.includes('room')) {
+      return {
+        pastPage: [],
+        currentPageName: 'Room Assign'
       };
     }
     else {

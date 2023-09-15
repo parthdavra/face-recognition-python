@@ -26,16 +26,43 @@ export class AdminLayoutService {
     return this.http.get(this.commonService.rootData.rootUrl + 'staff', { headers: headers })
   }
 
-  getattandanceList() {
+  getAttandanceList() {
     let localData = this.storageService.getValue('token');
     let headers = new HttpHeaders({
       'Authorization': `Bearer ${localData}`
     })
     return this.http.get(this.commonService.rootData.rootUrl + 'attendances', { headers: headers })
   }
-
-  saveData(data: any) {
-    return this.http.post(this.commonService.rootData.rootUrl + 'user-form', data)
+  getStaffAttandanceList() {
+    let localData = this.storageService.getValue('token');
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localData}`
+    })
+    return this.http.get(this.commonService.rootData.rootUrl + 'staff-attandances', { headers: headers })
   }
 
+  saveData(data: any) {
+    let localData = this.storageService.getValue('token');
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localData}`
+    })
+    return this.http.post(this.commonService.rootData.rootUrl + 'user-form', data,{ headers: headers })
+  }
+  saveImage(data: any) {
+    return this.http.post(this.commonService.rootData.rootUrl + 'image', data)
+  }
+  saveClass(data: any) {
+    let localData = this.storageService.getValue('token');
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localData}`
+    })
+    return this.http.post(this.commonService.rootData.rootUrl + 'class', data, { headers: headers })
+  }
+  getRoomList(){
+    let localData = this.storageService.getValue('token');
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ${localData}`
+    })
+    return this.http.get(this.commonService.rootData.rootUrl + 'rooms', { headers: headers })
+  }
 }

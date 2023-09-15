@@ -28,7 +28,12 @@ module.exports = class User {
     }
     static getAttendances(){
         return db.query(
-            `SELECT * FROM attendances LEFT JOIN users ON attendances.student_id = users.user_id`
+            `SELECT * FROM attendances LEFT JOIN users ON attendances.student_id = users.user_id LEFT JOIN class_number ON attendances.class_id = class_number.class_id where users.user_type != 'staff' OR  attendances.is_unknown = true`
+            )
+    }
+    static getStaffAttendances(){
+        return db.query(
+            `SELECT * FROM attendances LEFT JOIN users ON attendances.student_id = users.user_id LEFT JOIN class_number ON attendances.class_id = class_number.class_id where users.user_type = 'staff'`
             )
     }
     static getUser(userId){

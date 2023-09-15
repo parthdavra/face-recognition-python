@@ -42,8 +42,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    LoginLayoutComponent,
-    
+    LoginLayoutComponent
   ],
   providers: [
 

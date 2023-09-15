@@ -1,0 +1,52 @@
+<div class="container-fluid flex-grow-1 container-p-y">
+    <div class="card">
+        <div class="dataTables_wrapper dt-bootstrap5 no-footer">
+            <div class="card-header flex-md-row">
+                <div class="head-label text-center">
+                    <h5 class="card-title mb-0">Add</h5>
+                </div>
+                <div class="dt-action-buttons text-end pt-md-0">
+                    <div class="dt-buttons">
+                        <button class="dt-button create-new btn btn-outline-primary" (click)="cancel()"><span><i
+                                    class='bx bx-arrow-back  me-sm-2'></i><span class="d-none d-sm-inline-block">Back to
+                                    Lst</span></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body" *ngIf="cameraNumber.length > 0">
+                <form [formGroup]="addForm">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-sm-6 col-xs-6">
+                            <div class="mb-3">
+                                <label class="form-label required" for="basic-default-email">Camera Number</label>
+                                <ng-select [items]="cameraNumber" class="form-control p-0"
+                                     bindLabel="cameraNumber" [clearable]="true"
+                                    bindValue="cameraNumber" placeholder="Camera Number" [searchable]="false"
+                                    formControlName="class_id" >
+                                </ng-select>
+                                <div *ngIf="submittedData && faddData.class_id.errors">
+                                    <div *ngIf="faddData.class_id.errors.required">
+                                        <span class="error_msg">Camera Number is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-sm-6 col-xs-6">
+                            <div class="mb-3">
+                                <label class="form-label required" for="basic-default-email">Class Number</label>
+                                <input type="text" class="form-control" id="basic-default-company" placeholder="Class Number..."
+                                    formControlName="class_number" />
+                                <div *ngIf="submittedData && faddData.class_number.errors">
+                                    <div *ngIf="faddData.class_number.errors.required">
+                                        <span class="error_msg">Class Number is Required.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

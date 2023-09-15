@@ -19,6 +19,9 @@ import { UsersComponent } from 'app/pages/users/users.component';
 import { StaffComponent } from 'app/pages/staff/staff.component';
 import { AttandanceComponent } from 'app/pages/attandance/attandance.component';
 import { AddUserComponent } from 'app/pages/add-user/add-user.component';
+import { RoomAssignComponent } from 'app/pages/room-assign/room-assign.component';
+import { AddRoomComponent } from 'app/pages/add-room/add-room.component';
+import { StaffAttandanceComponent } from 'app/pages/staff-attandance/staff-attandance.component'; 
 
 @NgModule({
   imports: [
@@ -43,7 +46,10 @@ import { AddUserComponent } from 'app/pages/add-user/add-user.component';
     UsersComponent,
     StaffComponent,
     AttandanceComponent,
-    AddUserComponent
+    AddUserComponent,
+    RoomAssignComponent,
+    AddRoomComponent,
+    StaffAttandanceComponent
   ],
   providers: [MatDatepickerModule, DatePipe],
 })

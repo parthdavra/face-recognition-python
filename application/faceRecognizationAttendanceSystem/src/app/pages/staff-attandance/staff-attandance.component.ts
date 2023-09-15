@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AdminLayoutService } from 'app/layouts/admin-layout/admin-layout.service';
 
 @Component({
-  selector: 'app-attandance',
-  templateUrl: './attandance.component.html',
-  styleUrls: ['./attandance.component.css']
+  selector: 'app-staff-attandance',
+  templateUrl: './staff-attandance.component.html',
+  styleUrls: ['./staff-attandance.component.css']
 })
-export class AttandanceComponent implements OnInit {
+export class StaffAttandanceComponent implements OnInit {
 
   l: number;
   p: number = 1;
@@ -25,7 +25,7 @@ export class AttandanceComponent implements OnInit {
   }
 
   getattandanceList() {
-    this.adminLayoutService.getAttandanceList().subscribe((Response: any) => {
+    this.adminLayoutService.getStaffAttandanceList().subscribe((Response: any) => {
       this.allAttandanceList = Response.data;
       this.attandanceList = this.allAttandanceList;
       if (this.allAttandanceList.length > 0) {

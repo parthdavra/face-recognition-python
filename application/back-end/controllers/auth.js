@@ -2,14 +2,15 @@ const { validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Rooms = require('../models/rooms');
+
 
 exports.userForm = async (req, res, next) => {
     const errors = validationResult(req);
    if(!errors.isEmpty()) return
-    console.log('req.body:::',req.body);
-    const {name,email,password,user_type} = req.body;
-    console.log(req);
-    const min = 10000, max = 99999; 
+    const {name,email,password,user_type,user_id} = req.body;
+    
+     
     let hashedPassword ;
      try{
         const user = await User.find(email);
@@ -28,7 +29,7 @@ exports.userForm = async (req, res, next) => {
             email,
             password: hashedPassword,
             user_type,
-            user_id: Math.floor(Math.random() * (max - min + 1)) + min 
+            user_id: user_id
         }
         const result = await User.save(userDetails);
         const userData = await User.getUser(userDetails.user_id);
@@ -127,6 +128,19 @@ exports.getAttendances = async (req, res, next) => {
       next(err);
     }
 };
+exports.getStaffAttendances = async (req, res, next) => {
+
+  try {
+    const getAttendance = await User.getStaffAttendances();
+  
+    res.status(200).json({ data: getAttendance.rows });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
 exports.getUser = async (req, res, next) => {
 
     try {
@@ -139,4 +153,41 @@ exports.getUser = async (req, res, next) => {
       }
       next(err);
     }
+};
+
+exports.getRooms = async (req, res, next) => {
+
+  try {
+    const getRooms= await Rooms.getRooms();
+  
+    res.status(200).json({ data: getRooms.rows });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.addClass = async (req, res, next) => {
+
+  try {
+    const {class_number,class_id} = req.body;
+    
+    const getRooms= await Rooms.getRoomById(class_id);
+    
+    if(getRooms.rows.length == 0){
+      const addClass= await Rooms.addClass(class_id, class_number);
+      
+      res.status(200).json({ data: addClass.rows });
+    }else{
+      res.status(201).json({ message: 'This camera is already assign to class' });
+    }
+    
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
 };
