@@ -6,6 +6,7 @@ import { RoomAssignComponent } from 'app/pages/room-assign/room-assign.component
 import { UsersComponent } from 'app/pages/users/users.component';
 import { AddRoomComponent } from 'app/pages/add-room/add-room.component';
 import { StaffAttandanceComponent } from 'app/pages/staff-attandance/staff-attandance.component';
+import { ChangePasswordComponent } from 'app/pages/change-password/change-password.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'users', component: UsersComponent },
@@ -15,4 +16,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'room', component: RoomAssignComponent },
     { path: 'room/add', component: AddRoomComponent },
     { path: 'staff-attandance', component: StaffAttandanceComponent },
+    { path: 'change-password', component: ChangePasswordComponent },
+
 ];

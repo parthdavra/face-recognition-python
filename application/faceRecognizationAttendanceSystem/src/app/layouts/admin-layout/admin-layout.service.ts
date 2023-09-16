@@ -65,4 +65,7 @@ export class AdminLayoutService {
     })
     return this.http.get(this.commonService.rootData.rootUrl + 'rooms', { headers: headers })
   }
+  changePassword(data: any) {
+    return this.http.post(this.commonService.rootData.rootUrl + 'change-password', data)
+  }
 }

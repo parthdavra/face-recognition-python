@@ -94,6 +94,12 @@ export class NavbarComponent implements OnInit {
         currentPageName: 'Room Assign'
       };
     }
+    else if (titlee.includes('change-password')) {
+      return {
+        pastPage: [],
+        currentPageName: 'Change Password'
+      };
+    }
     else {
       return {
         pastPage: [],

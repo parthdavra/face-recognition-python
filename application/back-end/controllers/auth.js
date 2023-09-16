@@ -85,6 +85,49 @@ exports.login = async (req, res, next) => {
       next(err);
     }
   };
+  
+  exports.changePassword = async (req, res, next) => {
+
+    try {
+      const {password,new_password,user_id} = req.body;
+      const user = await User.getUser(user_id);
+      const storedUser = user.rows[0];
+      
+      if (user.rows.length == 1) {
+        let hashedPassword ;
+        if (storedUser.user_type != 'admin') {
+          const error = new Error('You are not addmin');
+          error.statusCode = 401; // 401: not authenticated
+          throw error;
+        }
+        const isEqual = await bcrypt.compare(password, storedUser.password);
+        if (!isEqual) {
+          const error = new Error('Wrong password!');
+          error.statusCode = 401;
+          throw error;
+        }
+        hashedPassword = await bcrypt.hash(new_password,12)
+        console.log(hashedPassword);
+        const userDetails = {
+          password: hashedPassword,
+          user_id: user_id
+        }
+        if(hashedPassword){
+          let data = await User.updatePassword(userDetails);
+          
+          res.status(201).json({ msg: 'Password has been upated!!', data: data});
+        }
+      }else{
+        res.status(404).json({ msg: 'You are not Admin'});
+      }
+     
+    } catch (err) {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    }
+};
 
 exports.getStaff = async (req, res, next) => {
 

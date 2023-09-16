@@ -10,6 +10,8 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
+import schedule
+import time
 
 def face_confidence(face_distance, face_match_threshold=0.6):
     range = (1.0 - face_match_threshold)
@@ -65,6 +67,7 @@ class FaceRecognition:
 
             self.known_face_encodings.append(face_encoding)
             self. known_face_names.append(image)
+
 
 
     def run_recognition(self):
@@ -155,13 +158,20 @@ class FaceRecognition:
                         cursor.execute(selectQuery)
                         rows = cursor.fetchall()
 
+
                         if len(rows) == 1:
                             cv2.imwrite(image_name, face_image)
                             face_image = face_recognition.load_image_file(f'{image_name}')
                             face_encoding = face_recognition.face_encodings(face_image)[0]
                             self.known_face_encodings.append(face_encoding)
                             self.known_face_names.append(image_name.split("/")[1])
+                            select_class_number = "select * from class_number where class_id = %s;" % int(i)
+                            cursor.execute(select_class_number)
+                            row = cursor.fetchall()
+                            if len(row) == 1:
+                                mail_send(int(student_id), image_name, row[0][2])
                             mail_send(int(student_id), image_name, int(i))
+
 
 
                     cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
