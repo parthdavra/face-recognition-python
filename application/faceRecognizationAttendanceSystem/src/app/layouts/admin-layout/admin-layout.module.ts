@@ -22,6 +22,7 @@ import { AddUserComponent } from 'app/pages/add-user/add-user.component';
 import { RoomAssignComponent } from 'app/pages/room-assign/room-assign.component';
 import { AddRoomComponent } from 'app/pages/add-room/add-room.component';
 import { StaffAttandanceComponent } from 'app/pages/staff-attandance/staff-attandance.component'; 
+import { ChangePasswordComponent } from 'app/pages/change-password/change-password.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { StaffAttandanceComponent } from 'app/pages/staff-attandance/staff-attan
     AddUserComponent,
     RoomAssignComponent,
     AddRoomComponent,
-    StaffAttandanceComponent
+    StaffAttandanceComponent,
+    ChangePasswordComponent
   ],
   providers: [MatDatepickerModule, DatePipe],
 })

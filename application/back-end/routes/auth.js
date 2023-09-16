@@ -45,5 +45,7 @@ router.get('/user/:id',auth, authController.getUser);
 router.get('/rooms',auth, authController.getRooms);
 router.post('/class', auth, authController.addClass);
 router.get('/staff-attandances',auth, authController.getStaffAttendances);
+router.post('/change-password', authController.changePassword);
+
 
 module.exports = router;

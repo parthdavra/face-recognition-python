@@ -39,4 +39,10 @@ module.exports = class User {
     static getUser(userId){
         return db.query(`SELECT * FROM users WHERE user_id = $1;`, [userId])
     }
+    static updatePassword(user){
+        console.log(user);
+        return db.query(
+            `UPDATE users SET password = $1 where user_id = $2 `, [user.password, parseInt(user.user_id)]
+        )
+    }
 };
